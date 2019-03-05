@@ -1,0 +1,69 @@
+# vi: set ft=yaml ts=2 sw=2:
+version: '3.4'
+services:
+  config-server-1:
+    image: mongo:3.6
+    command: mongod --config /etc/mongo/mongod.conf
+    volumes:
+      - ./config-server-1/mongod.conf:/etc/mongo/mongod.conf
+      - ./secret:/etc/mongo/secret
+    ports:
+      - 27019:27019
+  config-server-2:
+    image: mongo:3.6
+    command: mongod --config /etc/mongo/mongod.conf
+    volumes:
+      - ./config-server-2/mongod.conf:/etc/mongo/mongod.conf
+      - ./secret:/etc/mongo/secret
+    ports:
+      - 27029:27019
+  config-server-3:
+    image: mongo:3.6
+    command: mongod --config /etc/mongo/mongod.conf
+    volumes:
+      - ./config-server-3/mongod.conf:/etc/mongo/mongod.conf
+      - ./secret:/etc/mongo/secret
+    ports:
+      - 27039:27019
+#####################################################################
+  shard-1-1:
+    image: mongo:3.6
+    command: mongod --config /etc/mongo/mongod.conf
+    volumes:
+      - ./shard-1-1/mongod.conf:/etc/mongo/mongod.conf
+      - ./secret:/etc/mongo/secret
+    ports:
+      - 27011:27018
+  shard-1-2:
+    image: mongo:3.6
+    command: mongod --config /etc/mongo/mongod.conf
+    volumes:
+      - ./shard-1-2/mongod.conf:/etc/mongo/mongod.conf
+      - ./secret:/etc/mongo/secret
+    ports:
+      - 27012:27018
+  shard-2-1:
+    image: mongo:3.6
+    command: mongod --config /etc/mongo/mongod.conf
+    volumes:
+      - ./shard-2-1/mongod.conf:/etc/mongo/mongod.conf
+      - ./secret:/etc/mongo/secret
+    ports:
+      - 27021:27018
+  shard-2-2:
+    image: mongo:3.6
+    command: mongod --config /etc/mongo/mongod.conf
+    volumes:
+      - ./shard-2-2/mongod.conf:/etc/mongo/mongod.conf
+      - ./secret:/etc/mongo/secret
+    ports:
+      - 27022:27018
+#####################################################################
+  mongos:
+    image: mongo:3.6
+    command: mongos --config /etc/mongo/mongod.conf
+    volumes:
+      - ./mongos/mongod.conf:/etc/mongo/mongod.conf
+      - ./secret:/etc/mongo/secret
+    ports:
+      - 27017:27017
