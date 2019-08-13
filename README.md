@@ -113,7 +113,7 @@ rs.initiate(
 also create admin on shard-2, ref 2.1
 
 
-## 3. init mongos
+## 3. init mongo by mongos
 ```
 docker exec -it test-mongo_mongos_1 bash
 mongo localhost:27017
