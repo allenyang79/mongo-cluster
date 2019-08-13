@@ -110,6 +110,8 @@ rs.initiate(
   }
 )
 ```
+also create admin on shard-2, ref 2.1
+
 
 ## 3. init mongos
 ```
